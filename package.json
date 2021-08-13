@@ -4,15 +4,24 @@
   "description": "expense tracker app",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "shivanshu saxena",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^6.2.1",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
+    "email-validator": "^2.0.4",
     "express": "^4.17.1",
-    "mongoose": "^5.13.7",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.7"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
     "nodemon": "^2.0.12"
   }
 }
