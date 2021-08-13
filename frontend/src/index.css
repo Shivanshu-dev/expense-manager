@@ -1,0 +1,83 @@
+.head-container {
+  padding: 0;
+}
+
+.head-text {
+  font-size: 3rem;
+  font-weight: 600;
+  font-family: "Raleway", sans-serif;
+}
+
+.components-container {
+  padding: 3rem 5rem;
+}
+
+.login-button {
+  width: 100%;
+  height: 3rem;
+  background-color: aqua;
+  border-color: aqua;
+  color: blue;
+  font-size: large;
+  font-weight: 600;
+}
+
+.register-button {
+  width: 100%;
+  height: 3rem;
+  background-color: beige;
+  border-color: beige;
+  color: black;
+  font-size: large;
+  font-weight: 600;
+}
+
+.add-expense-container {
+  border-right: 3px solid black;
+  max-height: 100%;
+}
+
+.add-expense {
+  width: 100%;
+}
+
+.expenses-heading {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.view-expense-div {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.expense-title {
+  word-wrap: break-word;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.expense-description {
+  word-wrap: break-word;
+  text-align: center;
+  padding: 1rem;
+}
+
+.expense-date {
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.expense-amount {
+  word-wrap: break-word;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.length-of-note {
+  /* height: 0.5rem; */
+  margin: 0;
+  padding: 0;
+  text-align: end;
+  color: red;
+}
