@@ -1,6 +1,7 @@
 //server code
 const express = require("express");
 const PORT = process.env.PORT;
+const path = require("path");
 const dotenv = require("dotenv").config();
 const fileupload = require("express-fileupload");
 const authRoutes = require("./routes/authRoutes.js");
