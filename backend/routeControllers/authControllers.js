@@ -53,9 +53,21 @@ exports.loginUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
   // checking if user is sending data or not
   const { email, password, username } = req.body;
-  console.log(req.body);
+
   if (!req.files) {
     return res.status(400).json({ message: "photo missing", success: false });
+  }
+
+  if (
+    email === undefined ||
+    password === undefined ||
+    username === undefined ||
+    req.files === undefined
+  ) {
+    return res.status(400).json({
+      message: "we could not find any data please send valid data",
+      success: false,
+    });
   }
 
   if (!email || !password || !username) {

@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Container, Form, Row, Col, InputGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SubmitButton from "../Components/SubmitButton";
+import { loginUser } from "../actions/authAction";
 
 const Login = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { user, message, success } = useSelector((state) => state.users);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [viewPassword, setViewPassword] = useState(false);
@@ -22,7 +28,16 @@ const Login = () => {
 
   let handleLogin = (e) => {
     e.preventDefault();
+    const userInput = { email, password };
+    dispatch(loginUser(userInput));
   };
+
+  useEffect(() => {
+    if (Object.keys(user).length !== 0) {
+      history.push("/dashboard");
+    }
+  }, [history, user]);
+
   return (
     <>
       <Container>
@@ -30,6 +45,7 @@ const Login = () => {
           <Col lg={{ span: 8, offset: 2 }} md={{ span: 8, offset: 2 }} sm={12}>
             <Form onSubmit={handleLogin}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
+                {success === false && <p style={{ color: "red" }}>{message}</p>}
                 <Form.Label>Email address</Form.Label>
                 <InputGroup className="mb-2">
                   <InputGroup.Text>@</InputGroup.Text>

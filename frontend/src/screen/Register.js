@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import {
   Col,
   Container,
@@ -13,7 +14,8 @@ import { registerUser } from "../actions/authAction";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.users);
+  const history = useHistory();
+  const { user, message, success } = useSelector((state) => state.users);
   const [file, setFile] = useState();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -58,6 +60,7 @@ const Register = () => {
   };
 
   let handleRegister = (e) => {
+    console.log("123");
     e.preventDefault();
 
     if (!file[0].type.startsWith("image")) {
@@ -71,24 +74,26 @@ const Register = () => {
         email,
         password,
       };
-      console.log(userData);
+
       const sendData = new FormData();
 
       for (let key in userData) {
-        console.log(key);
-        sendData.append(key, sendData[key]);
-        console.log(sendData);
+        sendData.append(key, userData[key]);
       }
-
       if (file) {
         sendData.append("image", file[0], file[0].name);
       }
+
       // dispatch action sendata
       dispatch(registerUser(sendData));
     }
   };
 
-  console.log(user);
+  useEffect(() => {
+    if (Object.keys(user).length !== 0) {
+      history.push("/dashboard");
+    }
+  }, [history, user]);
 
   return (
     <>
@@ -127,6 +132,9 @@ const Register = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
+                {success === false && email.length !== 0 && (
+                  <p style={{ color: "red" }}>{message}</p>
+                )}
                 <Form.Control
                   value={email}
                   onChange={(e) => handleEmail(e.target.value)}
@@ -165,6 +173,11 @@ const Register = () => {
                 name="Register"
               />
             </Form>
+          </Col>
+        </Row>
+        <Row className="text-center mt-3">
+          <Col lg={{ span: 8, offset: 2 }} md={12} sm={12}>
+            <Link to="/">Already Member ? Login</Link>
           </Col>
         </Row>
       </Container>
