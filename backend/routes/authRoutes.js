@@ -5,6 +5,7 @@ const {
   logoutUser,
 } = require("../routeControllers/authControllers");
 const router = express.Router();
+const { protect } = require("../middlewares/authmiddleware.js");
 
 // login api
 router.post("/login", loginUser);
@@ -15,6 +16,6 @@ router.post("/register", registerUser);
 
 //logout api
 
-router.post("/logout", logoutUser);
+router.post("/logout", protect, logoutUser);
 
 module.exports = router;

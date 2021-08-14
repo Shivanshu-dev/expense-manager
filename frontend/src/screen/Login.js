@@ -17,7 +17,7 @@ const Login = () => {
   };
 
   let handleViewPassword = () => {
-    setViewPassword(true);
+    viewPassword ? setViewPassword(false) : setViewPassword(true);
   };
 
   let handleLogin = (e) => {

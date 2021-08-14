@@ -32,9 +32,15 @@ userSchema.pre("save", async function (next) {
 //calling jwt method on particular user
 
 userSchema.methods.getSignedJwtToken = function () {
-  return jwt.sign({ id: _id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+};
+
+// compare password method to compare password with user password on login
+// having access to the found user on login gives us access to the password of that user and we compare it to the entered password
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 module.exports = mongoose.model("User", userSchema);
