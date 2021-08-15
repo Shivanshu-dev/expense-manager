@@ -12,7 +12,7 @@ const UserHead = () => {
           <Col>
             <img
               style={{ height: "10rem", width: "auto", borderRadious: "50%" }}
-              src={`https://github.com/Shivanshu-dev/expense-manager/blob/main/backend/public/photos/${user.image}`}
+              src={`https://localhost:5000/images/photos/${user.image}`}
               alt="user-img"
             />
           </Col>
