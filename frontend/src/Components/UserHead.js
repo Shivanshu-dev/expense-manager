@@ -12,7 +12,7 @@ const UserHead = () => {
           <Col>
             <img
               style={{ height: "10rem", width: "auto", borderRadious: "50%" }}
-              src={`https://localhost:5000/images/photos/${user.image}`}
+              src={`https://expense-manager-dev02.herokuapp.com/images/photos/${user.image}`}
               alt="user-img"
             />
           </Col>
