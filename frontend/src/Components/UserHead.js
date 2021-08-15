@@ -12,7 +12,7 @@ const UserHead = () => {
           <Col>
             <img
               style={{ height: "10rem", width: "auto", borderRadious: "50%" }}
-              src={`http://localhost:5000/photos/${user.image}`}
+              src={`https://localhost:5000/photos/${user.image}`}
               alt="user-img"
             />
           </Col>
