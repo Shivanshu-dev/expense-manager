@@ -16,7 +16,7 @@ const ViewExpenses = () => {
       </Row>
       <Row>
         {expense.map((item) => (
-          <Col lg={4} md={6} sm={12}>
+          <Col key={item._id} lg={4} md={6} sm={12}>
             <EditModal show={modalShow} onHide={() => setModalShow(false)} />
             <div
               onClick={() => setModalShow(true)}

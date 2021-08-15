@@ -5,6 +5,7 @@ const path = require("path");
 const dotenv = require("dotenv").config();
 const fileupload = require("express-fileupload");
 const authRoutes = require("./routes/authRoutes.js");
+const expenseRouter = require("./routes/expenseRoutes.js");
 const connectDb = require("./configDB/db.js");
 
 const app = express();
@@ -21,6 +22,9 @@ app.use(fileupload());
 
 // base route for login
 app.use("/api/auth", authRoutes);
+
+// expense routes
+app.use("/api/user", expenseRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/../frontend/build", "index.html"));

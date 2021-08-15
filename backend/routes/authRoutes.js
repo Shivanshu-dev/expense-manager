@@ -4,18 +4,18 @@ const {
   registerUser,
   logoutUser,
 } = require("../routeControllers/authControllers");
-const router = express.Router();
+const authRoutes = express.Router();
 const { protect } = require("../middlewares/authmiddleware.js");
 
 // login api
-router.post("/login", loginUser);
+authRoutes.post("/login", loginUser);
 
 //register api
 
-router.post("/register", registerUser);
+authRoutes.post("/register", registerUser);
 
 //logout api
 
-router.post("/logout", protect, logoutUser);
+authRoutes.post("/logout", protect, logoutUser);
 
-module.exports = router;
+module.exports = authRoutes;

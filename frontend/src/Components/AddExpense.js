@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import SubmitButton from "./SubmitButton";
 import { addExpense } from "../actions/expenseAction";
 
 const AddExpense = () => {
+  const { user } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
@@ -36,7 +37,7 @@ const AddExpense = () => {
       date,
     };
 
-    dispatch(addExpense(data));
+    dispatch(addExpense(data, user));
   };
 
   return (

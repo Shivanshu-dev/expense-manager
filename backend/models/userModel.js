@@ -2,26 +2,32 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      require: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      min: [8],
+    },
   },
-  image: {
-    type: String,
-    require: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    min: [8],
-  },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 // hash password before we save the user and password access comes from creating a user on register api
 userSchema.pre("save", async function (next) {
@@ -42,5 +48,12 @@ userSchema.methods.getSignedJwtToken = function () {
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+userSchema.virtual("expenses", {
+  ref: "Expense",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false,
+});
 
 module.exports = mongoose.model("User", userSchema);
