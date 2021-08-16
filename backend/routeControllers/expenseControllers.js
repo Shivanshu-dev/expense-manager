@@ -28,11 +28,14 @@ exports.getAllExpenses = async (req, res) => {
 };
 
 exports.updateOneExpense = async (req, res) => {
+  // update expense with expense id
   console.log(req.body);
 };
 
 exports.deleteOneExpense = async (req, res) => {
-  console.log(req.body);
+  if (!req.user) {
+    // delete expense with expense id
+  }
 };
 
 exports.createExpense = async (req, res) => {

@@ -4,8 +4,20 @@ import { Col, Container, Row } from "react-bootstrap";
 import EditModal from "./EditModal";
 
 const ViewExpenses = () => {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [editItem, setEditItem] = useState("");
   const { expense } = useSelector((state) => state.expenses);
+
+  console.log("123");
+  let checkedit = (e) => {
+    setEditItem(e.target.getAttribute("value"));
+    setModalShow(true);
+  };
+
+  let hideModal = () => {
+    setEditItem("");
+    setModalShow(false);
+  };
 
   return (
     <Container>
@@ -14,15 +26,24 @@ const ViewExpenses = () => {
           <h3>Your Expenses Will Appear Here</h3>
         </Col>
       </Row>
+      {editItem.length !== 0 && (
+        <EditModal
+          value={editItem}
+          show={modalShow}
+          onHide={() => hideModal()}
+        />
+      )}
       <Row>
         {expense.map((item) => (
           <Col key={item._id} lg={4} md={6} sm={12}>
-            <EditModal show={modalShow} onHide={() => setModalShow(false)} />
-            <div
-              onClick={() => setModalShow(true)}
-              className="view-expense-div"
-            >
-              <h4 className="expense-title">{item.title}</h4>
+            <div className="view-expense-div">
+              <h4
+                onClick={checkedit}
+                value={item._id}
+                className="expense-title"
+              >
+                {item.title}
+              </h4>
 
               <p className="expense-description">{item.note}</p>
               <p className="expense-date">{item.date}</p>

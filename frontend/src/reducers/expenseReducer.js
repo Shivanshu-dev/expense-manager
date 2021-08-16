@@ -13,6 +13,14 @@ export const expenseReducer = (state = { expense: [] }, action) => {
         message: action.message,
         success: action.success,
       };
+    case "FETCH_EXPENSES_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_EXPENSES_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        expense: action.expenses,
+      };
     default:
       return state;
   }

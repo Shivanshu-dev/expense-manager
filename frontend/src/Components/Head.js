@@ -4,7 +4,7 @@ const Head = () => {
   return (
     <>
       <Container className="head-container" fluid>
-        <Navbar expand="lg" variant="light" bg="light">
+        <Navbar fixed="top" expand="lg" variant="light" bg="light">
           <Container>
             <Navbar.Brand className="head-text" href="#">
               Expense Manager

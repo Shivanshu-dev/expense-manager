@@ -86,7 +86,9 @@ const AddExpense = () => {
                   type="text"
                   value={amount}
                   required
-                  onChange={(e) => handleAmount(e.target.value)}
+                  onChange={(e) =>
+                    handleAmount(e.target.value.replace(/\D/, ""))
+                  }
                   placeholder="Enter Amount"
                 />
               </Form.Group>

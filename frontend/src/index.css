@@ -8,8 +8,13 @@
   font-family: "Raleway", sans-serif;
 }
 
+.user-head-container {
+  margin-top: 8rem;
+}
+
 .components-container {
   padding: 3rem 5rem;
+  margin-top: 5rem;
 }
 
 .login-button {

@@ -8,11 +8,11 @@ import ViewExpenses from "../Components/ViewExpenses";
 const Dashboard = () => {
   const dispatch = useDispatch();
 
-  const { expense } = useSelector((state) => state.expenses);
+  const { user } = useSelector((state) => state.users);
 
   useEffect(() => {
-    dispatch(fetchExpense());
-  }, [dispatch]);
+    dispatch(fetchExpense(user));
+  }, [dispatch, user]);
 
   return (
     <>

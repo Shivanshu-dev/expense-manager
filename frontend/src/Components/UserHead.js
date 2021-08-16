@@ -7,17 +7,17 @@ const UserHead = () => {
   console.log(user);
   return (
     <>
-      <Container>
+      <Container className="user-head-container">
         <Row>
-          <Col>
+          <Col className="text-end" lg={6} md={6} sm={6}>
             <img
-              style={{ height: "10rem", width: "auto", borderRadious: "50%" }}
+              style={{ height: "10rem", width: "auto", borderRadius: "45%" }}
               src={`https://expense-manager-dev02.herokuapp.com/images/photos/${user.image}`}
               alt="user-img"
             />
           </Col>
-          <Col>
-            <h3>{user.name}</h3>
+          <Col lg={6} md={6} sm={6}>
+            <h3 className="mt-5">{user.username}</h3>
             <h5>{user.email}</h5>
           </Col>
         </Row>

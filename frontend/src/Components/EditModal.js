@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 
 const EditModal = (props) => {
+  const { expense } = useSelector((state) => state.expenses);
+
+  let editID = props.value;
+
+  const expenseToEdit = expense?.filter((item) => item._id === editID);
+
+  const [newTitle, setNewTitle] = useState(expenseToEdit[0]?.title);
+  const [newNote, setNewNote] = useState(expenseToEdit[0]?.note);
+  const [date, setDate] = useState(expenseToEdit[0]?.date);
+  const [newAmount, setNewAmount] = useState(expenseToEdit[0]?.amount);
+
+  let editTitle = (e) => {
+    setNewTitle(e);
+  };
+
+  let editNote = (e) => {
+    setNewNote(e);
+  };
+
+  let editAmount = (e) => {
+    setNewAmount(e);
+  };
+
+  let deleteExpense = (e) => {
+    console.log(editID);
+    props.onHide();
+  };
+
   return (
     <>
       <Modal backdrop="static" {...props} size="lg" centered>
@@ -27,22 +57,35 @@ const EditModal = (props) => {
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Expense Title</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                value={newTitle}
+                onChange={(e) => editTitle(e.target.value)}
+                type="text"
+              />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Expense Note</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control
+                value={newNote}
+                onChange={(e) => editNote(e.target.value)}
+                as="textarea"
+                rows={3}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
               <Form.Label>Expense Date</Form.Label>
-              <Form.Control type="date" />
+              <Form.Control value={date} readOnly type="date" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Expense Amount</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                value={newAmount}
+                onChange={(e) => editAmount(e.target.value.replace(/\D/, ""))}
+                type="text"
+              />
             </Form.Group>
             <Row>
               <Col
@@ -51,7 +94,7 @@ const EditModal = (props) => {
                 md={12}
                 sm={12}
               >
-                <Button onClick={props.onHide}>Delete</Button>
+                <Button onClick={deleteExpense}>Delete</Button>
                 <Button onClick={props.onHide}>Edit</Button>
               </Col>
             </Row>
