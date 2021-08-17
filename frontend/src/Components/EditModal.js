@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { deleteExpense, updateOneExpense } from "../actions/expenseAction";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 
 const EditModal = (props) => {
   const { expense } = useSelector((state) => state.expenses);
+  const { user } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
 
   let editID = props.value;
 
@@ -27,8 +30,21 @@ const EditModal = (props) => {
     setNewAmount(e);
   };
 
-  let deleteExpense = (e) => {
+  let deleteOneExpense = () => {
+    // console.log(editID);
+    dispatch(deleteExpense(user, editID));
+    props.onHide();
+  };
+
+  let updateExpense = () => {
+    const newData = {
+      newTitle,
+      newNote,
+      date,
+      newAmount,
+    };
     console.log(editID);
+    dispatch(updateOneExpense(user, newData, editID));
     props.onHide();
   };
 
@@ -94,8 +110,8 @@ const EditModal = (props) => {
                 md={12}
                 sm={12}
               >
-                <Button onClick={deleteExpense}>Delete</Button>
-                <Button onClick={props.onHide}>Edit</Button>
+                <Button onClick={deleteOneExpense}>Delete</Button>
+                <Button onClick={updateExpense}>Edit</Button>
               </Col>
             </Row>
           </Form>

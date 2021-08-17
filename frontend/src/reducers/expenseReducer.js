@@ -21,6 +21,26 @@ export const expenseReducer = (state = { expense: [] }, action) => {
         loading: false,
         expense: action.expenses,
       };
+    case "DELETE_EXPENSE":
+      return {
+        ...state,
+        loading: false,
+        expense: state.expense.filter((item) => item._id !== action.removeID),
+        message: action.message,
+        success: action.success,
+      };
+    case "UPDATE_EXPENSE":
+      return {
+        ...state,
+        loading: false,
+        message: action.message,
+        success: action.success,
+        expense: state.expense.map((item) =>
+          item._id === action._id
+            ? { ...item, ...action.newUpdatedExpense }
+            : { ...item }
+        ),
+      };
     default:
       return state;
   }

@@ -8,7 +8,6 @@ const ViewExpenses = () => {
   const [editItem, setEditItem] = useState("");
   const { expense } = useSelector((state) => state.expenses);
 
-  console.log("123");
   let checkedit = (e) => {
     setEditItem(e.target.getAttribute("value"));
     setModalShow(true);

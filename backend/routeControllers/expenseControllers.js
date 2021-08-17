@@ -13,7 +13,7 @@ exports.getAllExpenses = async (req, res) => {
   const { _id } = req.user;
   try {
     const getUserExpenses = await User.findById(_id).populate("expenses");
-    console.log(getUserExpenses);
+
     if (!getUserExpenses) {
       return res.status(400).json({ message: "no data found", success: false });
     }
@@ -29,12 +29,72 @@ exports.getAllExpenses = async (req, res) => {
 
 exports.updateOneExpense = async (req, res) => {
   // update expense with expense id
-  console.log(req.body);
+  if (!req.user) {
+    return res.status(401).json({
+      message: "you are not authrized to delete this expense",
+      success: false,
+    });
+  }
+  try {
+    const newUpdatedExpense = await Expense.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.newTitle,
+        note: req.body.newNote,
+        data: req.body.date,
+        amount: req.body.newAmount,
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (!newUpdatedExpense) {
+      return res
+        .status(400)
+        .json({ message: "something went wrong", success: false });
+    }
+
+    console.log(newUpdatedExpense);
+    res.status(200).json({
+      message: "updated the expense",
+      newUpdatedExpense,
+      success: true,
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "something went wrong , server error", success: false });
+  }
 };
 
 exports.deleteOneExpense = async (req, res) => {
   if (!req.user) {
-    // delete expense with expense id
+    return res.status(401).json({
+      message: "you are not authrized to delete this expense",
+      success: false,
+    });
+  }
+
+  try {
+    const deleteExpense = await Expense.findByIdAndDelete(req.params.id);
+
+    if (!deleteExpense) {
+      return res.status(400).json({
+        message: "something went wrong could not delete expense",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "successfully deleted expense",
+      deleteExpense,
+      success: true,
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "server error while deleting expense", success: false });
   }
 };
 
@@ -55,7 +115,7 @@ exports.createExpense = async (req, res) => {
         .status(401)
         .json({ message: "no user with this id exists", success: false });
     }
-    console.log(title, note, amount, date, _id);
+
     const addedExpense = await Expense.create({
       title,
       amount,

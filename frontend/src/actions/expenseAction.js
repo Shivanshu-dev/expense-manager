@@ -78,16 +78,81 @@ export const addExpense = (newInput, user) => {
 
 // edit expense
 
+export const updateOneExpense = (user, updatedInfo, updateID) => {
+  return async (dispatch) => {
+    try {
+      options = {
+        headers: {
+          "content-type": "application/json",
+          authorization: `${user.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `/api/user/expense/${updateID}`,
+        updatedInfo,
+        options
+      );
+      const { message, newUpdatedExpense, success } = data;
+
+      const { _id } = newUpdatedExpense;
+      console.log(_id);
+
+      dispatch({
+        type: "UPDATE_EXPENSE",
+        message,
+        newUpdatedExpense,
+        _id,
+        success,
+      });
+    } catch (error) {
+      console.log(error.response);
+      const { message, success } = error.response;
+
+      // only hit this when we want a error condition implimented
+      dispatch({
+        type: "UPDATE_EXPENSE_ERROR",
+        message,
+        success,
+      });
+    }
+  };
+};
+
 // delete expense
 
 export const deleteExpense = (user, expenseID) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete("/", expenseID);
-    } catch (error) {}
+      options = {
+        headers: {
+          "content-type": "application/json",
+          authorization: `${user.token}`,
+        },
+      };
 
-    dispatch({
-      type: "REMOVE_EXPENSE",
-    });
+      const { data } = await axios.delete(
+        `/api/user/expense/${expenseID}`,
+        options
+      );
+      const { message, deleteExpense, success } = data;
+
+      const { _id: removeID } = deleteExpense;
+
+      dispatch({
+        type: "DELETE_EXPENSE",
+        message,
+        removeID,
+        success,
+      });
+    } catch (error) {
+      console.log(error.response);
+      const { message, success } = error.response;
+      dispatch({
+        type: "DELETE_EXPENSE_FAIL",
+        message,
+        success,
+      });
+    }
   };
 };
