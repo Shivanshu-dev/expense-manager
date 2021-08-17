@@ -38,6 +38,10 @@ const AddExpense = () => {
     };
 
     dispatch(addExpense(data, user));
+    setTitle("");
+    setNote("");
+    setDate("");
+    setAmount("");
   };
 
   return (
@@ -45,19 +49,19 @@ const AddExpense = () => {
       <Container className="add-expense-container">
         <Row>
           <Col lg={12} md={12} sm={12}>
-            <Form onSubmit={handleAddExpense}>
-              <Form.Group className="mb-3" controlId="formBasicText">
+            <Form className="mt-3" onSubmit={handleAddExpense}>
+              <Form.Group className="mb-3">
                 <Form.Label>Title</Form.Label>
                 <Form.Control
                   value={title}
                   onChange={(e) => handleTitle(e.target.value)}
                   type="text"
                   required
-                  placeholder="Enter Title"
+                  placeholder="Title For Your Expense"
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicText">
+              <Form.Group className="mb-3">
                 <Form.Label>Note</Form.Label>
 
                 <Form.Control
@@ -66,11 +70,11 @@ const AddExpense = () => {
                   value={note}
                   required
                   onChange={(e) => handleNote(e.target.value)}
-                  placeholder="Enter A Short Note"
+                  placeholder="A Short Note On Your Description"
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicText">
+              <Form.Group className="mb-3">
                 <Form.Label>Date</Form.Label>
                 <Form.Control
                   type="date"
@@ -80,7 +84,7 @@ const AddExpense = () => {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicText">
+              <Form.Group className="mb-3">
                 <Form.Label>Amount</Form.Label>
                 <Form.Control
                   type="text"

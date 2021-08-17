@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import validator from "validator";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import {
@@ -15,10 +16,11 @@ import { registerUser } from "../actions/authAction";
 const Register = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { user, message, success } = useSelector((state) => state.users);
+  const { user } = useSelector((state) => state.users);
   const [file, setFile] = useState();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(undefined);
   const [password, setPassword] = useState("");
   const [viewPassword, setViewPassword] = useState(false);
   const [fileError, setFileError] = useState(false);
@@ -34,6 +36,14 @@ const Register = () => {
 
   let handleEmail = (e) => {
     setEmail(e);
+  };
+
+  let checkValidEmail = (e) => {
+    if (validator.isEmail(e)) {
+      setValidEmail(true);
+    } else {
+      setValidEmail(false);
+    }
   };
 
   let handlePassword = (e) => {
@@ -132,12 +142,13 @@ const Register = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                {success === false && email.length !== 0 && (
-                  <p style={{ color: "red" }}>{message}</p>
+                {validEmail === false && email.length !== 0 && (
+                  <p style={{ color: "red" }}>Please Enter Valid Email</p>
                 )}
                 <Form.Control
                   value={email}
                   onChange={(e) => handleEmail(e.target.value)}
+                  onBlur={(e) => checkValidEmail(e.target.value)}
                   type="email"
                   required
                   placeholder="Enter email"
@@ -146,7 +157,7 @@ const Register = () => {
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Choose A Password</Form.Label>
-                {validPass && password.length <= 8 && password.length > 0 ? (
+                {validPass && password.length < 8 && password.length > 0 ? (
                   <p style={{ color: "red" }}>
                     Password must contain one Cap one Small one Special & one
                     Numberic character & should be atleast 8 characters long
@@ -162,13 +173,14 @@ const Register = () => {
                     value={password}
                     onBlur={(e) => validatePassword(e.target.value)}
                     required
+                    disabled={!validEmail}
                     placeholder="Password"
                   />
                 </InputGroup>
               </Form.Group>
 
               <SubmitButton
-                disable={password.length < 8 || validPass}
+                disable={!validPass && password.length < 8}
                 classname="register-button"
                 name="Register"
               />

@@ -46,7 +46,7 @@ const Login = () => {
             <Form onSubmit={handleLogin}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 {success === false && <p style={{ color: "red" }}>{message}</p>}
-                <Form.Label>Email address</Form.Label>
+                <Form.Label className="login-labels">Email address</Form.Label>
                 <InputGroup className="mb-2">
                   <InputGroup.Text>@</InputGroup.Text>
                   <Form.Control

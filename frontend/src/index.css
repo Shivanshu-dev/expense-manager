@@ -3,13 +3,30 @@
 }
 
 .head-text {
-  font-size: 3rem;
+  font-size: 4vw;
   font-weight: 600;
-  font-family: "Raleway", sans-serif;
+  font-family: "Patua One", cursive;
 }
 
 .user-head-container {
-  margin-top: 8rem;
+  height: 40vh;
+  background: rgba(138, 130, 130, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.userheader-name {
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-family: "Capriola", sans-serif;
+}
+
+.userheader-email {
+  font-size: 1rem;
+  text-transform: lowercase;
+  font-family: "Capriola", sans-serif;
 }
 
 .components-container {
@@ -38,12 +55,18 @@
 }
 
 .add-expense-container {
-  border-right: 3px solid black;
-  max-height: 100%;
+  background: #e0e0e0;
+  box-shadow: -20px 20px 32px #9d9d9d, 20px -20px 32px #ffffff;
+}
+
+.view-expense-heading {
+  font-family: "Raleway", sans-serif;
 }
 
 .add-expense {
   width: 100%;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 .expenses-heading {
@@ -52,30 +75,38 @@
 }
 
 .view-expense-div {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 36px;
+  background: #e0e0e0;
+  box-shadow: -12px 12px 32px #848484, 12px -12px 32px #ffffff;
 }
 
 .expense-title {
   word-wrap: break-word;
   text-align: center;
   padding-top: 1rem;
+  color: blue;
+  text-transform: capitalize;
 }
 
 .expense-description {
   word-wrap: break-word;
   text-align: center;
+  font-style: italic;
+  font-weight: 500;
   padding: 1rem;
 }
 
 .expense-date {
   word-wrap: break-word;
+  font-weight: 600;
+
   text-align: center;
 }
 
 .expense-amount {
   word-wrap: break-word;
   text-align: center;
+  color: red;
   padding-bottom: 1rem;
 }
 

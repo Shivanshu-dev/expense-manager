@@ -2,6 +2,7 @@
 const express = require("express");
 const PORT = process.env.PORT;
 const path = require("path");
+const cors = require("cors");
 const dotenv = require("dotenv").config();
 const fileupload = require("express-fileupload");
 const authRoutes = require("./routes/authRoutes.js");
@@ -12,6 +13,15 @@ const app = express();
 connectDb();
 // parsing body
 app.use(express.json());
+app.use(
+  cors({
+    allowedHeaders: ["sessionId", "Content-Type"],
+    exposedHeaders: ["sessionId"],
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+  })
+);
 // parsing cookie
 // app.use(cookieParser());
 // serving static files from photos folder
