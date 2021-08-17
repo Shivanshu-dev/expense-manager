@@ -26,6 +26,8 @@ export const authReducer = (state = { user: {} }, action) => {
         success: action.success,
         message: action.message,
       };
+    case "LOGOUT_USER":
+      return { user: {}, loading: true };
     default:
       return state;
   }

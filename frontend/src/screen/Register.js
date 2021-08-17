@@ -60,7 +60,7 @@ const Register = () => {
   };
 
   let handleRegister = (e) => {
-    console.log("123");
+    // console.log("123");
     e.preventDefault();
 
     if (!file[0].type.startsWith("image")) {

@@ -22,7 +22,7 @@ exports.getAllExpenses = async (req, res) => {
       .status(200)
       .json({ message: " fetched expenses", success: true, getUserExpenses });
   } catch (error) {
-    console.log(error);
+    // .log(error);console
     return res.status(400).json({ message: error, success: false });
   }
 };
@@ -55,7 +55,7 @@ exports.updateOneExpense = async (req, res) => {
         .json({ message: "something went wrong", success: false });
     }
 
-    console.log(newUpdatedExpense);
+    // console.log(newUpdatedExpense);
     res.status(200).json({
       message: "updated the expense",
       newUpdatedExpense,

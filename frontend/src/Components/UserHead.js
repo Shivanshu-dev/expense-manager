@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const UserHead = () => {
   const { user } = useSelector((state) => state.users);
-  console.log(user);
+  // console.log(user);
   return (
     <>
       <Container className="user-head-container">

@@ -22,9 +22,9 @@ function App() {
             <Route exact path="/dashboard" component={Dashboard} />
           )}
           {Object.keys(user).length === 0 ? (
-            <Redirect to="/" />
+            <Redirect exact to="/" component={Login} />
           ) : (
-            <Redirect to="/dashboard" />
+            <Redirect exact to="/dashboard" component={Dashboard} />
           )}
         </Switch>
       </Container>

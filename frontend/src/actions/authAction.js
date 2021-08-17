@@ -22,8 +22,9 @@ export const loginUser = (userInput) => {
         type: "USER_LOGIN_SUCCESS",
         loggedInUser,
       });
+      localStorage.setItem("User", JSON.stringify(loggedInUser));
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
       const { data } = error.response;
 
       const { message, success } = data;
@@ -37,7 +38,12 @@ export const loginUser = (userInput) => {
 };
 
 export const logoutUser = () => {
-  return async (dispatch) => {};
+  return async (dispatch) => {
+    dispatch({
+      type: "LOGOUT_USER",
+    });
+    localStorage.removeItem("User");
+  };
 };
 
 export const registerUser = (data) => {
@@ -60,6 +66,8 @@ export const registerUser = (data) => {
         type: "USER_REGISTER_SUCCESS",
         registeredUser,
       });
+
+      localStorage.setItem("User", JSON.stringify(registeredUser));
     } catch (error) {
       // failure responses
       const { data } = error.response;

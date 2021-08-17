@@ -15,7 +15,7 @@ const EditModal = (props) => {
 
   const [newTitle, setNewTitle] = useState(expenseToEdit[0]?.title);
   const [newNote, setNewNote] = useState(expenseToEdit[0]?.note);
-  const [date, setDate] = useState(expenseToEdit[0]?.date);
+  const date = useState(expenseToEdit[0]?.date);
   const [newAmount, setNewAmount] = useState(expenseToEdit[0]?.amount);
 
   let editTitle = (e) => {
@@ -43,7 +43,7 @@ const EditModal = (props) => {
       date,
       newAmount,
     };
-    console.log(editID);
+    // console.log(editID);
     dispatch(updateOneExpense(user, newData, editID));
     props.onHide();
   };

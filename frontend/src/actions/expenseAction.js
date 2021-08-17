@@ -39,7 +39,7 @@ export const fetchExpense = (user) => {
 };
 
 export const addExpense = (newInput, user) => {
-  console.log(newInput, user);
+  // console.log(newInput, user);
   return async (dispatch) => {
     dispatch({
       type: "ADD_EXPENSE_REQUEST",
@@ -96,7 +96,7 @@ export const updateOneExpense = (user, updatedInfo, updateID) => {
       const { message, newUpdatedExpense, success } = data;
 
       const { _id } = newUpdatedExpense;
-      console.log(_id);
+      // console.log(_id);
 
       dispatch({
         type: "UPDATE_EXPENSE",
@@ -106,7 +106,7 @@ export const updateOneExpense = (user, updatedInfo, updateID) => {
         success,
       });
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
       const { message, success } = error.response;
 
       // only hit this when we want a error condition implimented
@@ -146,7 +146,7 @@ export const deleteExpense = (user, expenseID) => {
         success,
       });
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
       const { message, success } = error.response;
       dispatch({
         type: "DELETE_EXPENSE_FAIL",
